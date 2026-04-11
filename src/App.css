@@ -1,5 +1,22 @@
-nav{
-  width: 50%;
-  display: flex ;
-  justify-content: space-evenly;
+*{
+  margin: 0;
+  padding: 0;
+}
+.navbar-custom {
+  background: linear-gradient(0.25turn, #0A7342, #0bad51 );
+  margin-bottom: 2%;
+}
+.img-custom{
+  margin-left: 2%;
+}
+.links{
+  font-size: large;
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+  
+}
+
+.links:hover{
+  color: blue;
 }
