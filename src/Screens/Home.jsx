@@ -1,11 +1,39 @@
+import banner from "../Assets/banner-teste.webp";
+import "../Components/Home.css"
 export default function Home() {
   return (
-    <div>
-      <h1>Home</h1>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-        Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-    </div>
+    <body>
+        <div id="carouselExampleInterval" className="carousel slide carosel-custom" data-bs-ride="carousel">
+
+                            <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      </div>
+
+          <div class="carousel-inner">
+            <div class="carousel-item active" data-bs-interval="10000">
+              <img src={banner} class="d-block w-100" alt="banner azul de promoção"/>
+            </div>
+            <div class="carousel-item" data-bs-interval="2000">
+              <img src={banner} class="d-block w-100" alt="..."/>
+            </div>
+            <div class="carousel-item">
+              <img src={banner} class="d-block w-100" alt="..."/>
+            </div>
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+        </div>
+
+
+    </body>
+
   );
 }
