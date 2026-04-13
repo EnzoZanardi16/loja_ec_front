@@ -1,5 +1,6 @@
 import banner from "../Assets/banner-teste.webp";
 import "../Components/Home.css"
+import ProdutoCarousel from "../Components/ProdutoCarousel";
 export default function Home() {
   return (
     <body>
@@ -30,6 +31,10 @@ export default function Home() {
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
+        </div>
+
+        <div>
+<ProdutoCarousel />
         </div>
 
 
