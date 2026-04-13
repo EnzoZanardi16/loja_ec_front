@@ -1,0 +1,11 @@
+.carousel-btn {
+  background: rgba(0,0,0,0.2);
+  border: none;
+  padding: 10px;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.carousel-btn:hover {
+  background: rgba(0,0,0,0.5);
+}
