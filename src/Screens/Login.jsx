@@ -1,8 +1,12 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import { Alert } from "bootstrap";
 
 export default function Login() {
+
+  const [alert, setAlert] = useState(null);
   const { setIsAuthenticated } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -10,34 +14,52 @@ export default function Login() {
   const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
+    Swal.fire({
+      title: "Entrando...",
+      text: "Aguarde um momento",
+      allowOutsideClick: false,
+      didOpen: () => {
+        Swal.showLoading();
+      }
+    });
     e.preventDefault(); // evita recarregar a página
 
+
+
     try {
-      console.log({ email, password });
-     const response = await fetch("http://localhost:8000/api/auth/login", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  credentials: "include",
-  body: JSON.stringify({
-    email,
-    password,
-  }),
-});
+      const response = await fetch("http://localhost:8000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
       const data = await response.json();
 
       if (response.ok) {
-        // salva token (ajuste conforme seu backend)
-        console.log(data);
-        //localStorage.setItem("token", data.token);
-        alert("sucess");
-
+        Swal.fire({
+          icon: "success",
+          title: "Sucesso!",
+          text: "Login realizado com sucesso",
+          timer: 1500,
+          showConfirmButton: false
+        });
         setIsAuthenticated(true);
-        navigate("/");
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
+
       } else {
-        alert(data.message || "Erro ao fazer login");
+        Swal.fire({
+          icon: "error",
+          title: "Erro",
+          text: "Informações inválidas"
+        });
       }
     } catch (error) {
       console.error(error);
@@ -48,11 +70,23 @@ export default function Login() {
   return (
     <section className="d-flex justify-content-center align-items-center">
       <div className="login-container p-4 rounded-4 shadow">
-        
+
+        {/* ✅ ALERTA AQUI */}
+        {alert && (
+          <div className={`alert alert-${alert.type} alert-dismissible fade show`} role="alert">
+            {alert.message}
+            <button
+              type="button"
+              className="btn-close"
+              onClick={() => setAlert(null)}
+            ></button>
+          </div>
+        )}
+
         <h1 className="text-center">Login</h1>
 
         <form onSubmit={handleLogin}>
-          
+
           <div className="mb-3">
             <label htmlFor="email" className="form-label">
               Email address
