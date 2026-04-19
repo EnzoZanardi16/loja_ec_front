@@ -28,11 +28,11 @@ const scrollRight = () => {
 
 return (
     <div className="position-relative">
-<button 
-  className="position-absolute top-50 start-0 translate-middle-y border-0 bg-transparent px-2 z-3"
+<button
+  className="arrow-btn left"
   onClick={scrollLeft}
 >
-  <span className="carousel-control-prev-icon" />
+  ‹
 </button>
     <div ref={scrollRef} className="d-flex overflow-auto gap-3 p-3" style={{ scrollBehavior: "smooth"}}>
         {products.map(produto => (
@@ -45,11 +45,11 @@ return (
             </div>
         ))}
     </div>
-<button 
-  className="position-absolute top-50 end-0 translate-middle-y border-0 bg-transparent px-2 z-3"
+<button
+  className="arrow-btn right"
   onClick={scrollRight}
 >
-  <span className="carousel-control-next-icon" />
+  ›
 </button>
 
     </div>
