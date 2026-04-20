@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 // import { data } from "react-router-dom";
 import "../Components/ProdutoCarousel.css"
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -8,6 +9,7 @@ export default function ProdutoCarousel(){
 
     const [products, setProducts] = useState([]);
     const scrollRef = useRef(null);
+    const navigate = useNavigate();
 
     useEffect(() => {
         fetch("http://localhost:8000/api/produtos")
@@ -35,8 +37,14 @@ return (
   ‹
 </button>
     <div ref={scrollRef} className="d-flex overflow-auto gap-3 p-3" style={{ scrollBehavior: "smooth"}}>
+
         {products.map(produto => (
-            <div key={produto.id} className="card" style={{minWidth: "200px"}}>
+                    <div 
+  key={produto.id} 
+  className="card"
+  style={{ minWidth: "200px", cursor: "pointer" }}
+  onClick={() => navigate(`/produto/${produto.id}`)}
+>
                 <img src={produto.imagem} className="card-img-top" alt="" />
                 <div className="card-body">
                     <h6>{produto.nome}</h6>
