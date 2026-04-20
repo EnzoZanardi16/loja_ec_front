@@ -5,6 +5,7 @@ import Login from "./Screens/Login"
 import Carrinho from "./Screens/Carrinho"
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Logo from "./Assets/logo-teste.png";
+import ProdutoDetalhe from "./Screens/ProdutoDetalhe";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
       <Route path='/' element={<Home />}></Route>
        <Route path='/Login' element={<Login />}></Route>
        <Route path='/Carrinho' element={<Carrinho />}></Route>
+       <Route path="/produto/:id" element={<ProdutoDetalhe />} />
     </Routes>
    </BrowserRouter>
   );
