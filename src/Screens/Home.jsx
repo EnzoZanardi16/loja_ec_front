@@ -2,6 +2,7 @@ import banner from "../Assets/banner-teste.webp";
 import "../Components/Home.css"
 import ProdutoCarousel from "./ProdutoCarousel";
 import CategoriaBar from "./CategoriaBar";
+import ProdutoGrid from "./ProdutoGrid"
 export default function Home() {
   return (
     <main>
@@ -41,6 +42,11 @@ export default function Home() {
 
       <div className="section-products">
         <ProdutoCarousel />
+      </div>
+
+
+      <div className="section-productsG">
+        <ProdutoGrid />
       </div>
 
     </main>
