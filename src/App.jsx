@@ -2,13 +2,18 @@ import logo from './logo.svg';
 import './App.css';
 import Home from "./Screens/Home"
 import Login from "./Screens/Login"
+import Vendedor from "./Screens/Vendedor"
 import Carrinho from "./Screens/Carrinho"
 import { BrowserRouter, Route, Routes, Link } from 'react-router-dom';
 import Logo from "./Assets/logo-teste.png";
 import ProdutoDetalhe from "./Screens/ProdutoDetalhe";
+import { useContext } from "react";
+import { AuthContext } from "./Context/AuthContext";
 
 function App() {
+      const { user } = useContext(AuthContext);
   return (
+
    <BrowserRouter>
 
 <nav className="navbar navbar-expand-lg navbar-custom" >
@@ -38,6 +43,19 @@ function App() {
             <Link className="links nav-link active" aria-current="page" to="/Carrinho">Carrinho</Link>
           
         </li>
+          <li className="nav-item">
+{user?.is_vendedor && (
+  <li className="nav-item">
+    <Link
+      className="links nav-link active"
+      to="/Vendedor"
+    >
+      Painel do Vendedor
+    </Link>
+  </li>
+)}
+          
+        </li>
       </ul>
     </div>
   </div>
@@ -47,6 +65,14 @@ function App() {
        <Route path='/Login' element={<Login />}></Route>
        <Route path='/Carrinho' element={<Carrinho />}></Route>
        <Route path="/produto/:id" element={<ProdutoDetalhe />} />
+       <Route
+  path="/Vendedor"
+  element={
+    user?.is_vendedor
+      ? <Vendedor />
+      : <Home />
+  }
+/>
     </Routes>
    </BrowserRouter>
   );

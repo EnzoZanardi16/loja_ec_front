@@ -7,7 +7,7 @@ import { Alert } from "bootstrap";
 export default function Login() {
 
   const [alert, setAlert] = useState(null);
-  const { setIsAuthenticated } = useContext(AuthContext);
+  const { setIsAuthenticated, setUser } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
@@ -40,19 +40,37 @@ export default function Login() {
       });
 
       const data = await response.json();
+        if (response.ok) {
 
-      if (response.ok) {
-        Swal.fire({
-          icon: "success",
-          title: "Sucesso!",
-          text: "Login realizado com sucesso",
-          timer: 1500,
-          showConfirmButton: false
-        });
-        setIsAuthenticated(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
+          localStorage.setItem("token", data.token);
+
+          const userResponse = await fetch(
+            "http://localhost:8000/api/user",
+            {
+              headers: {
+                Authorization: `Bearer ${data.token}`,
+              },
+            }
+          );
+
+          const userData = await userResponse.json();
+
+          console.log("USUARIO:", userData);
+
+          setUser(userData);
+          setIsAuthenticated(true);
+
+          Swal.fire({
+            icon: "success",
+            title: "Sucesso!",
+            text: "Login realizado com sucesso",
+            timer: 1500,
+            showConfirmButton: false
+          });
+
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
 
       } else {
         Swal.fire({
